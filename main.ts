@@ -78,6 +78,17 @@ namespace Tinybit {
         power_down
 
     }
+        // Enumeration for move direction
+    export enum MoveDirection {
+        //% block="forward"
+        Forward,
+        //% block="backward"
+        Backward,
+        //% block="left"
+        Left,
+        //% block="right"
+        Right
+    }
     export enum enPos {
 
         //% blockId="LeftState" block="LeftState"
@@ -494,18 +505,6 @@ namespace Tinybit {
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
 
-    }
-
-    // Enumeration for move direction
-    export enum MoveDirection {
-        //% block="forward"
-        Forward,
-        //% block="backward"
-        Backward,
-        //% block="left"
-        Left,
-        //% block="right"
-        Right
     }
 
     //% blockId=move_robot block="move robot %direction|for %time ms"
