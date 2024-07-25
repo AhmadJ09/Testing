@@ -452,20 +452,20 @@ namespace Tinybit {
         //% block="right"
         Right
     }
-//% blockId=turn_robot block="turn robot %direction|"
-//% weight=98
-//% blockGap=10
-//% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
-export function turnRobot(direction: TurnDirection): void {
-    let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
-    if (direction === TurnDirection.Left) {
-        setPwmMotor(3, 100, 100); // Turn left
-    } else if (direction === TurnDirection.Right) {
-        setPwmMotor(4, 100, 100); // Turn right
+    //% blockId=turn_robot block="turn robot %direction|"
+    //% weight=98
+    //% blockGap=10
+    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+    export function turnRobot(direction: TurnDirection): void {
+        let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
+        if (direction === TurnDirection.Left) {
+            setPwmMotor(3, 100, 100); // Turn left
+        } else if (direction === TurnDirection.Right) {
+            setPwmMotor(4, 100, 100); // Turn right
+        }
+        control.waitMicros(turnTime * 1000); // Wait for the specified time
+        setPwmMotor(0, 0, 0); // Stop the robot
     }
-    control.waitMicros(turnTime * 1000); // Wait for the specified time
-    setPwmMotor(0, 0, 0); // Stop the robot
-}
     //% blockId=stop_robot block="stop robot"
     //% weight=99
     //% blockGap=10
