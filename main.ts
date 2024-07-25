@@ -496,8 +496,8 @@ namespace Tinybit {
 
     }
 
-    // Enumeration for move direction
-    export enum MoveDirection {
+    // Enumeration for MoveDirection
+    enum MoveDirection {
         //% block="forward"
         Forward,
         //% block="backward"
@@ -509,6 +509,10 @@ namespace Tinybit {
     }
 
     //% blockId=move_robot block="move robot %direction|for %time ms"
+    //% weight=100
+    //% blockGap=10
+    //% color="#FF5733"
+    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function moveRobot(direction: MoveDirection, time: number): void {
         // Set motors to move in the chosen direction
         switch (direction) {
