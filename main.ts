@@ -467,7 +467,7 @@ namespace Tinybit {
         setPwmMotor(0, 0, 0); // Stop the robot
     }
     //% blockId=stop_robot block="stop robot"
-    //% weight=110
+    //% weight=90
     //% blockGap=10
     //% color="#FF5733"
     export function stopRobot(): void {
