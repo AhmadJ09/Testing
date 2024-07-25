@@ -11,7 +11,7 @@ namespace Tinybit {
     const PWM_ADD = 0x01
     const MOTOR = 0x02
     const RGB = 0x01
-    
+
     let yahStrip: neopixel.Strip;
 
     export enum enColor {
@@ -92,8 +92,8 @@ namespace Tinybit {
         //% blockId="Black" block="Black Line"
         Black = 1
     }
-    
-    
+
+
     export enum CarState {
         //% blockId="Car_Run" block="Run"
         Car_Run = 1,
@@ -118,17 +118,17 @@ namespace Tinybit {
         buf[1] = red;
         buf[2] = green;
         buf[3] = blue;
-        
+
         pins.i2cWriteBuffer(PWM_ADD, buf);
     }
 
     function setPwmMotor(mode: number, speed1: number, speed2: number): void {
         if (mode < 0 || mode > 6)
             return;
-        
+
         let buf = pins.createBuffer(5);
         buf[0] = MOTOR;
-        switch (mode) { 
+        switch (mode) {
             case 0: buf[1] = 0; buf[2] = 0; buf[3] = 0; buf[4] = 0; break;              //stop
             case 1: buf[1] = speed1; buf[2] = 0; buf[3] = speed2; buf[4] = 0; break;    //run
             case 2: buf[1] = 0; buf[2] = speed1; buf[3] = 0; buf[4] = speed2; break;    //back
@@ -139,13 +139,13 @@ namespace Tinybit {
         }
         pins.i2cWriteBuffer(PWM_ADD, buf);
     }
-    function stop_the_car(): void { 
+    function stop_the_car(): void {
         let buff = pins.createBuffer(5);
         buff[0] = MOTOR;
 
         buff[1] = 0; buff[2] = 0; buff[3] = 0; buff[4] = 0;         //stop
         pins.i2cWriteBuffer(PWM_ADD, buff);
-            
+
     }
 
     function move_step(): void {
@@ -163,7 +163,7 @@ namespace Tinybit {
 
     }
 
-    
+
     function move_steps(num_steps: number): void {
         let buf = pins.createBuffer(5);
         buf[0] = MOTOR;
@@ -199,14 +199,14 @@ namespace Tinybit {
     }
 
     function Car_stop() {
-       
+
         setPwmMotor(0, 0, 0);
     }
 
     function Car_spinleft(speed1: number, speed2: number) {
 
         setPwmMotor(5, speed1, speed2);
-    } 
+    }
 
     function Car_spinright(speed1: number, speed2: number) {
 
@@ -216,7 +216,7 @@ namespace Tinybit {
     /**
      * *****************************************************************
      * @param index
-     */   
+     */
 
     //% blockId=Tinybit_RGB_Car_Program block="RGB_Car_Program"
     //% weight=0
@@ -224,12 +224,12 @@ namespace Tinybit {
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function RGB_Car_Program(): neopixel.Strip {
-         
+
         if (!yahStrip) {
             yahStrip = neopixel.create(DigitalPin.P12, 2, NeoPixelMode.RGB);
         }
-        return yahStrip;  
-    }  
+        return yahStrip;
+    }
 
     //% blockId=one_step_forward block="one_step_forward"
     //% weight=1
@@ -237,21 +237,21 @@ namespace Tinybit {
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function one_step_forward(): void {
-         
-        move_step(); 
-    }  
 
-    
+        move_step();
+    }
+
+
     //% blockId=Move_Steps block="Move_Steps|n_steps %n_steps"
     //% weight=2
     //% blockGap=10
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Move_Steps(n_steps: number): void {
-         
-        move_steps(n_steps); 
-    }  
-    
+
+        move_steps(n_steps);
+    }
+
 
 
     //% blockId=Tinybit_RGB_Car_Big block="Light Color %value"
@@ -295,17 +295,17 @@ namespace Tinybit {
             }
         }
     }
-//% blockId=Tinybit_RGB_Car_Big2 block="Light Color|Red %Red|Green %Green|Blue %Blue"
-//% weight=4
-//% blockGap=10
-//% Red.min=0 Red.max=255 Green.min=0 Green.max=255 Blue.min=0 Blue.max=255
-//% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
-    setPwmRGB(Red, Green, Blue);
-}
+    //% blockId=Tinybit_RGB_Car_Big2 block="Light Color|Red %Red|Green %Green|Blue %Blue"
+    //% weight=4
+    //% blockGap=10
+    //% Red.min=0 Red.max=255 Green.min=0 Green.max=255 Blue.min=0 Blue.max=255
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
+        setPwmRGB(Red, Green, Blue);
+    }
 
 
-    
+
     //% blockId=Tinybit_Music_Car block="Music_Car|%index"
     //% weight=11
     //% blockGap=10
@@ -335,9 +335,9 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
             case enMusic.power_down: music.beginMelody(music.builtInMelody(Melodies.PowerDown), MelodyOptions.Once); break;
         }
     }
-    
-    
-    
+
+
+
     //% blockId=Tinybit_CarCtrl block="CarCtrl|%index"
     //% weight=5
     //% blockGap=10
@@ -354,7 +354,7 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
             case CarState.Car_SpinRight: Car_spinright(255, 255); break;
         }
     }
-    
+
     //% blockId=Tinybit_CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
     //% weight=6
     //% blockGap=10
@@ -372,7 +372,7 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
             case CarState.Car_SpinRight: Car_spinright(speed, speed); break;
         }
     }
-    
+
     //% blockId=Tinybit_CarCtrlSpeed2 block="CarCtrlSpeed2|%index|speed1 %speed1|speed2 %speed2"
     //% weight=7
     //% blockGap=10
@@ -389,10 +389,10 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
             case CarState.Car_SpinLeft: Car_spinleft(speed1, speed2); break;
             case CarState.Car_SpinRight: Car_spinright(speed1, speed2); break;
         }
-    }    
-        
-   
-    
+    }
+
+
+
     //% blockId=Tinybit_Line_Sensor block="Line Sensor Detector %direct|value %value"
     //% weight=8
     //% blockGap=10
@@ -405,18 +405,18 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
         pins.setPull(DigitalPin.P14, PinPullMode.PullNone);
         switch (direct) {
             case enPos.LeftState: {
-                if (pins.digitalReadPin(DigitalPin.P13) == value) {              
-                    temp = true;                  
+                if (pins.digitalReadPin(DigitalPin.P13) == value) {
+                    temp = true;
                 }
-                else {                  
-                     temp = false;
+                else {
+                    temp = false;
                 }
                 break;
             }
 
             case enPos.RightState: {
-                if (pins.digitalReadPin(DigitalPin.P14) == value) {              
-                    temp = true;                  
+                if (pins.digitalReadPin(DigitalPin.P14) == value) {
+                    temp = true;
                 }
                 else {
                     temp = false;
@@ -433,14 +433,14 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function Voice_Sensor(): number {
-	    //pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
-        let temp  = 0;		
-        temp = pins.analogReadPin(AnalogPin.P1);           
-            
+        //pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
+        let temp = 0;
+        temp = pins.analogReadPin(AnalogPin.P1);
+
         return temp;
 
     }
-        
+
     //% blockId=Tinybit_Ultrasonic_Car block="ultrasonic return distance(cm)"
     //% color="#585CA9"
     //% weight=10
@@ -448,24 +448,23 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Ultrasonic_Car(): number {
 
-       	let list:Array<number> = [0, 0, 0, 0, 0];
-				for (let i = 0; i < 5; i++)
-				{
-					pins.setPull(DigitalPin.P16, PinPullMode.PullNone);
-					pins.digitalWritePin(DigitalPin.P16, 0);
-					control.waitMicros(2);
-					pins.digitalWritePin(DigitalPin.P16, 1);
-					control.waitMicros(15);
-					pins.digitalWritePin(DigitalPin.P16, 0);
-					let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
-					list[i] = Math.floor(d / 40);
-				}
-				list.sort();
-				let length = (list[1] + list[2] + list[3])/3;
-				return  Math.floor(length);
+        let list: Array<number> = [0, 0, 0, 0, 0];
+        for (let i = 0; i < 5; i++) {
+            pins.setPull(DigitalPin.P16, PinPullMode.PullNone);
+            pins.digitalWritePin(DigitalPin.P16, 0);
+            control.waitMicros(2);
+            pins.digitalWritePin(DigitalPin.P16, 1);
+            control.waitMicros(15);
+            pins.digitalWritePin(DigitalPin.P16, 0);
+            let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
+            list[i] = Math.floor(d / 40);
+        }
+        list.sort();
+        let length = (list[1] + list[2] + list[3]) / 3;
+        return Math.floor(length);
     }
 
-export enum TurnDirection {
+    export enum TurnDirection {
         //% block="left"
         Left,
         //% block="right"
@@ -495,8 +494,39 @@ export enum TurnDirection {
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
 
-}
+    }
 
+    // Enumeration for move direction
+    export enum MoveDirection {
+        //% block="forward"
+        Forward,
+        //% block="backward"
+        Backward,
+        //% block="left"
+        Left,
+        //% block="right"
+        Right
+    }
 
+    //% blockId=move_robot block="move robot %direction|for %time ms"
+    export function moveRobot(direction: MoveDirection, time: number): void {
+        // Set motors to move in the chosen direction
+        switch (direction) {
+            case MoveDirection.Forward:
+                setPwmMotor(1, 100, 100); // Move forward
+                break;
+            case MoveDirection.Backward:
+                setPwmMotor(2, 100, 100); // Move backward
+                break;
+            case MoveDirection.Left:
+                setPwmMotor(3, 100, 100); // Move left
+                break;
+            case MoveDirection.Right:
+                setPwmMotor(4, 100, 100); // Move right
+                break;
+        }
+        control.waitMicros(time * 1000); // Wait for the specified time
+        setPwmMotor(0, 0, 0); // Stop the robot
+    }
 
 }
