@@ -477,12 +477,12 @@ export enum TurnDirection {
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobot(direction: TurnDirection): void {
-        let turnTime = 300; // Adjust this value based on your robot's turning speed and calibration
+        let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
 
         if (direction === TurnDirection.Left) {
-            setPwmMotor(3, 100, 100); // Turn left
+            setPwmMotor(3, 90, 90); // Turn left
         } else if (direction === TurnDirection.Right) {
-            setPwmMotor(4, 100, 100); // Turn right
+            setPwmMotor(4, 90, 90); // Turn right
         }
         control.waitMicros(turnTime * 1000); // Wait for the specified time
         setPwmMotor(0, 0, 0); // Stop the robot
