@@ -493,4 +493,41 @@ namespace Tinybit {
         control.waitMicros(turnTime * 1000); // Wait for the calculated time
         setPwmMotor(0, 0, 0); // Stop the robot
     }
+
+enum Directionn {
+        //% block="forward"
+        Forward,
+        //% block="backward"
+        Backward
+}
+
+// Function to convert distance in cm to steps
+function distanceToSteps(distance: number): number {
+    const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
+    return distance * stepsPerCm;
+}
+
+// Function to move the robot based on distance
+//% blockId=move_robot_distance block="Move robot %direction for %distance cm"
+//% weight=102 color=#585CA9
+export function moveRobotByDistance(direction: Directionn, distance: number): void {
+    let steps = distanceToSteps(distance);
+    moveRobotBySteps(direction, steps);
+}
+
+// Existing function to move the robot by steps
+//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+//% weight=101 color=#585CA9
+export function moveRobotBySteps(direction: Directionn, steps: number): void {
+    // Example implementation of moving the robot by steps
+    if (direction === Direction.Forward) {
+        motorLeft.forward(steps);
+        motorRight.forward(steps);
+    } else if (direction === Direction.Backward) {
+        motorLeft.backward(steps);
+        motorRight.backward(steps);
+    }
+}
+
+    
 }
