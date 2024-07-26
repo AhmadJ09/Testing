@@ -469,7 +469,7 @@ namespace Tinybit {
     //% blockId=stop_robot block="stop robot"
     //% weight=99
     //% blockGap=10
-    //% color="#AF8735"
+    //% color="#bf6753"
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
@@ -497,6 +497,8 @@ namespace Tinybit {
 
 // Enum for direction
 export enum Direction {
+// Enum for direction
+export enum Direction {
     //% block="forward"
     Forward,
     //% block="backward"
@@ -507,7 +509,6 @@ export enum Direction {
 //% blockId=move_robot_steps block="Move robot %direction for %steps steps"
 //% weight=101 color=#585CA9
 export function moveRobotBySteps(direction: Direction, steps: number): void {
-    // Move the robot for the specified number of steps
     for (let i = 0; i < steps; i++) {
         if (direction === Direction.Forward) {
             setPwmMotor(1, 100, 100); // Move forward
@@ -519,22 +520,23 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
         setPwmMotor(0, 0, 0); // Stop all motors
         basic.pause(200); // Short pause before next step
     }
-    // Ensure motors are stopped after completing all steps
-    setPwmMotor(0, 0, 0); // Stop all motors
-}
-
-// Function to convert distance in cm to steps
-function distanceToSteps(distance: number): number {
-    const stepsPerCm = 1; // Example conversion rate, adjust based on calibration
-    return distance * stepsPerCm;
 }
 
 // Function to move the robot by distance
 //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
 //% weight=102 color=#585CA9
 export function moveRobotByDistance(direction: Direction, distance: number): void {
-    let steps = distanceToSteps(distance);
-    moveRobotBySteps(direction, steps);
+    const speed = 100; // Speed at which the robot moves
+    const timeToMove = distance / speed * 1000; // Calculate time in milliseconds
+
+    if (direction === Direction.Forward) {
+        setPwmMotor(speed, speed, 2); // Move forward
+    } else if (direction === Direction.Backward) {
+        setPwmMotor(speed, speed, 1); // Move backward
+    }
+    basic.pause(timeToMove); // Move for the calculated time
+    // Stop all motors after the movement
+    setPwmMotor(0, 0, 0); // Stop all motors
 }
 
 
