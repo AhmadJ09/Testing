@@ -496,4 +496,20 @@ namespace Tinybit {
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
+
+        // Function to convert distance in cm to steps
+    function distanceToSteps(distance: number): number {
+        const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
+        return distance * stepsPerCm;
+    }
+
+    // Function to move the robot based on distance
+    //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
+    //% weight=102 color=#585CA9
+    export function moveRobotByDistance(direction: Direction, distance: number): void {
+        let steps = distanceToSteps(distance);
+
+        moveRobotBySteps(direction, steps);
+    }
+
 }
