@@ -525,7 +525,7 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
 
 // Function to convert distance in cm to steps
 function distanceToSteps(distance: number): number {
-    const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
+    const stepsPerCm = 1; // Example conversion rate, adjust based on calibration
     return distance * stepsPerCm;
 }
 
