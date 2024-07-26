@@ -495,8 +495,7 @@ namespace Tinybit {
     }
 
 
-// Enum for direction
-export enum Direction {
+
 // Enum for direction
 export enum Direction {
     //% block="forward"
