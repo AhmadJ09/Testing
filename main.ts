@@ -561,9 +561,9 @@ function speedValueToCmPerSecond(speedValue: number): number {
 export function moveRobotForTimeAndSpeed(direction: Direction2, time: number, speed: number): void {
     const speedCmPerSecond = speedValueToCmPerSecond(speed);
     
-    if (direction === Direction.Forward) {
+    if (direction === Direction2.Forward) {
         setPwmMotor(1, speed, speed); // Move forward
-    } else if (direction === Direction.Backward) {
+    } else if (direction === Direction2.Backward) {
         setPwmMotor(2, speed, speed); // Move backward
     }
 
