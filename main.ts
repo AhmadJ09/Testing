@@ -495,6 +495,7 @@ namespace Tinybit {
     }
 
 
+// Enum for direction
 export enum Direction {
     //% block="forward"
     Forward,
@@ -502,13 +503,29 @@ export enum Direction {
     Backward
 }
 
-// Function to convert distance in cm to steps
+// Function to move the robot by steps
+//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+//% weight=101 color=#585CA9
+export function moveRobotBySteps(direction: Direction, steps: number): void {
+    for (let i = 0; i < steps; i++) {
+        if (direction === Direction.Forward) {
+            setPwmMotor(1, 100, 100); // Move forward
+        } else if (direction === Direction.Backward) {
+            setPwmMotor(2, 100, 100); // Move backward
+        }
+        basic.pause(500); // Pause for visibility of each step
+        // Stop motors after each step
+        setPwmMotor(0, 0, 0); // Stop all motors
+        basic.pause(200); // Short pause before next step
+    }
+}
+    // Function to convert distance in cm to steps
 function distanceToSteps(distance: number): number {
     const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
     return distance * stepsPerCm;
 }
 
-// Function to move the robot based on distance
+// Function to move the robot by distance
 //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
 //% weight=102 color=#585CA9
 export function moveRobotByDistance(direction: Direction, distance: number): void {
@@ -516,27 +533,6 @@ export function moveRobotByDistance(direction: Direction, distance: number): voi
     moveRobotBySteps(direction, steps);
 }
 
-// Function to move the robot by steps
-//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
-//% weight=101 color=#585CA9
-export function moveRobotBySteps(direction: Direction, steps: number): void {
-    switch (direction) {
-        case Direction.Forward:
-            setPwmMotor(1, 100); // Move forward
-            break;
-        case Direction.Backward:
-            setPwmMotor(2, 100); // Move backward
-            break;
-    }
-    controlSteps(steps);
-}
 
-// Placeholder for actual implementation of controlling the number of steps
-function controlSteps(steps: number): void {
-    // Example loop for controlling steps, replace with your actual implementation
-    for (let i = 0; i < steps; i++) {
-        // Code to control the motor for one step
-    }
-}
 
 }
