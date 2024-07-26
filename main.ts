@@ -494,12 +494,12 @@ namespace Tinybit {
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-enum Directionn {
+    export enum Direction{
         //% block="forward"
         Forward,
         //% block="backward"
         Backward
-}
+    } 
 
 // Function to convert distance in cm to steps
 function distanceToSteps(distance: number): number {
@@ -510,7 +510,7 @@ function distanceToSteps(distance: number): number {
 // Function to move the robot based on distance
 //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
 //% weight=102 color=#585CA9
-export function moveRobotByDistance(direction: Directionn, distance: number): void {
+export function moveRobotByDistance(direction: Direction, distance: number): void {
     let steps = distanceToSteps(distance);
     moveRobotBySteps(direction, steps);
 }
@@ -518,16 +518,15 @@ export function moveRobotByDistance(direction: Directionn, distance: number): vo
 // Existing function to move the robot by steps
 //% blockId=move_robot_steps block="Move robot %direction for %steps steps"
 //% weight=101 color=#585CA9
-export function moveRobotBySteps(direction: Directionn, steps: number): void {
-    // Example implementation of moving the robot by steps
-    if (direction === Direction.Forward) {
-        motorLeft.forward(steps);
-        motorRight.forward(steps);
-    } else if (direction === Direction.Backward) {
-        motorLeft.backward(steps);
-        motorRight.backward(steps);
-    }
+export function moveRobotBySteps(direction: Direction, steps: number): void {
+        switch (direction) {
+            case MoveDirection.Forward:
+                setPwmMotor(1, 100, 100); // Move forward
+                break;
+            case MoveDirection.Backward:
+                setPwmMotor(2, 100, 100); // Move backward
+                break;
 }
-
+}
     
 }
