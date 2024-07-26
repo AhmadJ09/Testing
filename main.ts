@@ -496,9 +496,7 @@ namespace Tinybit {
 
 
 enum Direction {
-    //% block="forward"
     Forward,
-    //% block="backward"
     Backward
 }
 
@@ -508,41 +506,32 @@ function distanceToSteps(distance: number): number {
     return distance * stepsPerCm;
 }
 
-// Function to move the robot based on distance
+// Function to move the robot for a specific number of steps
+//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+//% weight=101 color=#585CA9
+export function moveRobotBySteps(direction: Direction, steps: number): void {
+    let currentSteps = 0;
+    while (currentSteps < steps) {
+        // Set motor speed and direction
+        setPwmMotor(100, 100, direction === Direction.Forward ? 2 : 1);
+        
+        // Increment steps counter
+        currentSteps++;
+        
+        // Short delay to simulate step movement and give visual feedback
+        basic.pause(100); // Adjust the pause duration as needed
+    }
+    
+    // Stop the motors
+    setPwmMotor(0, 0, direction === Direction.Forward ? 2 : 1);
+}
+
+// Function to move the robot for a specific distance in cm
 //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
 //% weight=102 color=#585CA9
 export function moveRobotByDistance(direction: Direction, distance: number): void {
     let steps = distanceToSteps(distance);
     moveRobotBySteps(direction, steps);
-}
-
-// Function to move the robot by steps
-//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
-//% weight=101 color=#585CA9
-export function moveRobotBySteps(direction: Direction, steps: number): void {
-    let stepCount = 0;
-
-    // Define the speed and direction
-    const speed = 100; // Example speed value
-    const directionValue = direction === Direction.Forward ? 2 : 1; // 2 for forward, 1 for backward
-
-    // Move the robot step by step
-    while (stepCount < steps) {
-        // Move the robot in the desired direction
-        setPwmMotor(speed, speed, directionValue);
-
-        // Wait a short amount of time to allow the robot to move a step
-        basic.pause(100); // Adjust the delay as needed for your step duration
-
-        // Stop the robot after moving one step
-        setPwmMotor(0, 0, directionValue);
-
-        // Increment the step count
-        stepCount++;
-    }
-
-    // Ensure the robot stops completely after the movement
-    setPwmMotor(0, 0, directionValue);
 }
 
 
