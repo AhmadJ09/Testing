@@ -530,11 +530,5 @@ namespace Tinybit {
         }
     }
 
-    // Placeholder function for motor control (replace with actual implementation)
-    function setPwmMotor(motor: number, speed: number, steps: number): void {
-        // Example implementation, replace with actual motor control code
-        console.log(`Setting motor ${motor} with speed ${speed} for ${steps} steps.`);
-    }
-
 
 }
