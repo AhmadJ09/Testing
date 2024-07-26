@@ -457,7 +457,7 @@ namespace Tinybit {
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobot(direction: TurnDirection): void {
-        let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
+        let turnTime = 350; // Adjust this value based on your robot's turning speed and calibration
         if (direction === TurnDirection.Left) {
             setPwmMotor(3, 100, 100); // Turn left
         } else if (direction === TurnDirection.Right) {
@@ -470,7 +470,7 @@ namespace Tinybit {
 
     // Function to turn the robot by a specific angle
     //% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
-    //% weight=100
+    //% weight=92
     //% angle.min=0 angle.max=360
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
