@@ -540,7 +540,7 @@ export function moveRobotByDistance(direction: Direction, distance: number): voi
 }
 
 // Enum for direction
-export enum Direction {
+export enum Direction2 {
     //% block="forward"
     Forward,
     //% block="backward"
@@ -558,7 +558,7 @@ function speedValueToCmPerSecond(speedValue: number): number {
 // Function to move the robot based on user-defined time, speed, and direction
 //% blockId=move_robot_time_speed_direction block="Move robot %direction for %time seconds at speed %speed"
 //% weight=103 color=#585CA9
-export function moveRobotForTimeAndSpeed(direction: Direction, time: number, speed: number): void {
+export function moveRobotForTimeAndSpeed(direction: Direction2, time: number, speed: number): void {
     const speedCmPerSecond = speedValueToCmPerSecond(speed);
     
     if (direction === Direction.Forward) {
