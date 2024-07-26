@@ -507,6 +507,7 @@ export enum Direction {
 //% blockId=move_robot_steps block="Move robot %direction for %steps steps"
 //% weight=101 color=#585CA9
 export function moveRobotBySteps(direction: Direction, steps: number): void {
+    // Move the robot for the specified number of steps
     for (let i = 0; i < steps; i++) {
         if (direction === Direction.Forward) {
             setPwmMotor(100, 100, 2); // Move forward
@@ -518,7 +519,10 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
         setPwmMotor(0, 0, 0); // Stop all motors
         basic.pause(200); // Short pause before next step
     }
+    // Ensure motors are stopped after completing all steps
+    setPwmMotor(0, 0, 0); // Stop all motors
 }
+
 // Function to convert distance in cm to steps
 function distanceToSteps(distance: number): number {
     const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
