@@ -495,37 +495,20 @@ namespace Tinybit {
     }
 
 
-// Enum for direction
-export enum Direction {
+enum Direction {
     //% block="forward"
     Forward,
     //% block="backward"
     Backward
 }
 
-// Function to move the robot by steps
-//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
-//% weight=101 color=#585CA9
-export function moveRobotBySteps(direction: Direction, steps: number): void {
-    for (let i = 0; i < steps; i++) {
-        if (direction === Direction.Forward) {
-            setPwmMotor(1, 100, 100); // Move forward
-        } else if (direction === Direction.Backward) {
-            setPwmMotor(2, 100, 100); // Move backward
-        }
-        basic.pause(500); // Pause for visibility of each step
-        // Stop motors after each step
-        setPwmMotor(0, 0, 0); // Stop all motors
-        basic.pause(200); // Short pause before next step
-    }
-}
-    // Function to convert distance in cm to steps
+// Function to convert distance in cm to steps
 function distanceToSteps(distance: number): number {
     const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
     return distance * stepsPerCm;
 }
 
-// Function to move the robot by distance
+// Function to move the robot based on distance
 //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
 //% weight=102 color=#585CA9
 export function moveRobotByDistance(direction: Direction, distance: number): void {
@@ -533,6 +516,34 @@ export function moveRobotByDistance(direction: Direction, distance: number): voi
     moveRobotBySteps(direction, steps);
 }
 
+// Function to move the robot by steps
+//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+//% weight=101 color=#585CA9
+export function moveRobotBySteps(direction: Direction, steps: number): void {
+    let stepCount = 0;
+
+    // Define the speed and direction
+    const speed = 100; // Example speed value
+    const directionValue = direction === Direction.Forward ? 2 : 1; // 2 for forward, 1 for backward
+
+    // Move the robot step by step
+    while (stepCount < steps) {
+        // Move the robot in the desired direction
+        setPwmMotor(speed, speed, directionValue);
+
+        // Wait a short amount of time to allow the robot to move a step
+        basic.pause(100); // Adjust the delay as needed for your step duration
+
+        // Stop the robot after moving one step
+        setPwmMotor(0, 0, directionValue);
+
+        // Increment the step count
+        stepCount++;
+    }
+
+    // Ensure the robot stops completely after the movement
+    setPwmMotor(0, 0, directionValue);
+}
 
 
 }
