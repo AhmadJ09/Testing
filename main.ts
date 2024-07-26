@@ -531,5 +531,4 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
     }
 }
 
-
 }
