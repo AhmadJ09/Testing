@@ -422,7 +422,7 @@ namespace Tinybit {
         Right
     }
 
-    //% blockId=move_robot block="move robot %direction|for %time ms"
+    //% blockId=move_robot block="move robot %direction|for %time s"
     //% weight=100
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
@@ -442,7 +442,7 @@ namespace Tinybit {
                 setPwmMotor(4, 100, 100); // Move right
                 break;
         }
-        control.waitMicros(time * 1000); // Wait for the specified time
+        control.waitMicros(time * 1000000); // Wait for the specified time
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
@@ -514,7 +514,7 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
         } else if (direction === Direction.Backward) {
             setPwmMotor(2, 100, 100); // Move backward
         }
-        basic.pause(500); // Pause for visibility of each step
+        basic.pause(200); // Pause for visibility of each step
         // Stop motors after each step
         setPwmMotor(0, 0, 0); // Stop all motors
         basic.pause(50); // Short pause before next step
@@ -539,5 +539,36 @@ export function moveRobotByDistance(direction: Direction, distance: number): voi
     setPwmMotor(0, 0, 0); // Stop all motors
 }
 
+// Enum for direction
+export enum Direction {
+    //% block="forward"
+    Forward,
+    //% block="backward"
+    Backward
+}
+
+// Speed of the robot in cm/second at speed value 100
+const cmPerSecondAtSpeed100 = 50; 
+
+// Function to convert speed value (0-100) to actual speed in cm/second
+function speedValueToCmPerSecond(speedValue: number): number {
+    return (speedValue / 100) * cmPerSecondAtSpeed100;
+}
+
+// Function to move the robot based on user-defined time, speed, and direction
+//% blockId=move_robot_time_speed_direction block="Move robot %direction for %time seconds at speed %speed"
+//% weight=103 color=#585CA9
+export function moveRobotForTimeAndSpeed(direction: Direction, time: number, speed: number): void {
+    const speedCmPerSecond = speedValueToCmPerSecond(speed);
+    
+    if (direction === Direction.Forward) {
+        setPwmMotor(1, speed, speed); // Move forward
+    } else if (direction === Direction.Backward) {
+        setPwmMotor(2, speed, speed); // Move backward
+    }
+
+    basic.pause(time * 1000); // Convert time from seconds to milliseconds
+    setPwmMotor(0, 0, 0); // Stop all motors after the specified time
+}
 
 }
