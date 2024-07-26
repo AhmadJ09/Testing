@@ -469,13 +469,13 @@ namespace Tinybit {
     //% blockId=stop_robot block="stop robot"
     //% weight=99
     //% blockGap=10
-    //% color="#FF5733"
+    //% color="#AF5736"
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
 
 
-        // Function to turn the robot by a specific angle
+    // Function to turn the robot by a specific angle
     //% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
     //% weight=92
     //% angle.min=0 angle.max=360
@@ -494,39 +494,47 @@ namespace Tinybit {
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    export enum Direction{
+
+    export enum Direction {
         //% block="forward"
         Forward,
         //% block="backward"
         Backward
-    } 
+    }
 
-// Function to convert distance in cm to steps
-function distanceToSteps(distance: number): number {
-    const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
-    return distance * stepsPerCm;
-}
+    // Function to convert distance in cm to steps
+    function distanceToSteps(distance: number): number {
+        const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
+        return distance * stepsPerCm;
+    }
 
-// Function to move the robot based on distance
-//% blockId=move_robot_distance block="Move robot %direction for %distance cm"
-//% weight=102 color=#585CA9
-export function moveRobotByDistance(direction: Direction, distance: number): void {
-    let steps = distanceToSteps(distance);
-    moveRobotBySteps(direction, steps);
-}
+    // Function to move the robot based on distance
+    //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
+    //% weight=102 color=#585CA9
+    export function moveRobotByDistance(direction: Direction, distance: number): void {
+        let steps = distanceToSteps(distance);
+        moveRobotBySteps(direction, steps);
+    }
 
-// Existing function to move the robot by steps
-//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
-//% weight=101 color=#585CA9
-export function moveRobotBySteps(direction: Direction, steps: number): void {
+    // Existing function to move the robot by steps
+    //% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+    //% weight=101 color=#585CA9
+    export function moveRobotBySteps(direction: Direction, steps: number): void {
         switch (direction) {
-            case MoveDirection.Forward:
-                setPwmMotor(1, 100, 100); // Move forward
+            case Direction.Forward:
+                setPwmMotor(1, 100, steps); // Move forward
                 break;
-            case MoveDirection.Backward:
-                setPwmMotor(2, 100, 100); // Move backward
+            case Direction.Backward:
+                setPwmMotor(2, 100, steps); // Move backward
                 break;
-}
-}
-    
+        }
+    }
+
+    // Placeholder function for motor control (replace with actual implementation)
+    function setPwmMotor(motor: number, speed: number, steps: number): void {
+        // Example implementation, replace with actual motor control code
+        console.log(`Setting motor ${motor} with speed ${speed} for ${steps} steps.`);
+    }
+
+
 }
