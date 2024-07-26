@@ -499,7 +499,9 @@ namespace Tinybit {
 
 // Enum to represent direction
 enum Direction {
+    //% block="Forward" 
     Forward,
+    //% block="Backward"
     Backward
 }
 
