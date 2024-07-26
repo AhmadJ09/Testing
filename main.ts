@@ -529,9 +529,9 @@ export function moveRobotByDistance(direction: Direction, distance: number): voi
     const timeToMove = distance / speed * 1000; // Calculate time in milliseconds
 
     if (direction === Direction.Forward) {
-        setPwmMotor(speed, speed, 2); // Move forward
+        setPwmMotor(1, 100, 100); // Move forward
     } else if (direction === Direction.Backward) {
-        setPwmMotor(speed, speed, 1); // Move backward
+        setPwmMotor(2, 100, 100); // Move backward
     }
     basic.pause(timeToMove); // Move for the calculated time
     // Stop all motors after the movement
