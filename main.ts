@@ -497,6 +497,7 @@ namespace Tinybit {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
 
+// Enum to represent direction
 enum Direction {
     Forward,
     Backward
@@ -516,15 +517,17 @@ export function moveRobotByDistance(direction: Direction, distance: number): voi
     moveRobotBySteps(direction, steps);
 }
 
-// Existing function to move the robot by steps
+// Function to move the robot by steps
 //% blockId=move_robot_steps block="Move robot %direction for %steps steps"
 //% weight=101 color=#585CA9
 export function moveRobotBySteps(direction: Direction, steps: number): void {
     // Example implementation of moving the robot by steps
     if (direction === Direction.Forward) {
         // Code to move forward by the given steps
+        // Add your specific implementation here
     } else if (direction === Direction.Backward) {
         // Code to move backward by the given steps
+        // Add your specific implementation here
     }
 }
 
