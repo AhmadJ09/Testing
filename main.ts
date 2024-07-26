@@ -466,28 +466,34 @@ namespace Tinybit {
         control.waitMicros(turnTime * 1000); // Wait for the specified time
         setPwmMotor(0, 0, 0); // Stop the robot
     }
+
+
+    // Function to turn the robot by a specific angle
+    //% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
+    //% weight=100
+    //% angle.min=0 angle.max=360
+    //% blockGap=10
+    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+    export function turnRobotByAngle(direction: TurnDirection, angle: number): void {
+        let turnTimePer90Degrees = 500; // Time to turn 90 degrees
+        let turnTime = (angle / 90) * turnTimePer90Degrees; // Calculate time for the specified angle
+
+        if (direction === TurnDirection.Left) {
+            setPwmMotor(3, 100, 100); // Turn left
+        } else if (direction === TurnDirection.Right) {
+            setPwmMotor(4, 100, 100); // Turn right
+        }
+        control.waitMicros(turnTime * 1000); // Wait for the calculated time
+        setPwmMotor(0, 0, 0); // Stop the robot
+    }
+
+
+    
     //% blockId=stop_robot block="stop robot"
-    //% weight=90
+    //% weight=99
     //% blockGap=10
     //% color="#FF5733"
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
-
-    // Function to convert distance in cm to steps
-    function distanceToSteps(distance: number): number {
-        const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
-        return distance * stepsPerCm;
-    }
-
-    // Function to move the robot based on distance
-    //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
-    //% weight=102 color=#585CA9
-    export function moveRobotByDistance(direction: Direction, distance: number): void {
-        let steps = distanceToSteps(distance);
-
-        moveRobotBySteps(direction, steps);
-    }
-
-
 }
