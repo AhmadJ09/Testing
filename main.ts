@@ -526,7 +526,8 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
 //% weight=102 color=#585CA9
 export function moveRobotByDistance(direction: Direction, distance: number): void {
     const speed = 100; // Speed at which the robot moves
-    const timeToMove = distance / speed * 1000; // Calculate time in milliseconds
+    const Rdistance = distance*2
+    const timeToMove = Rdistance / speed * 1000; // Calculate time in milliseconds
 
     if (direction === Direction.Forward) {
         setPwmMotor(1, 100, 100); // Move forward
