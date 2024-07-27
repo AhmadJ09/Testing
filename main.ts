@@ -260,7 +260,7 @@ namespace Tinybit {
         setPwmRGB(Red, Green, Blue);
     }
 
-    //% blockId=Tinybit_Music_Car block="Music_Car|%index"
+    //% blockId=Tinybit_Music_Car block="Robot music|%index"
     //% weight=11
     //% blockGap=10
     //% color="#585CA9"
@@ -292,12 +292,12 @@ namespace Tinybit {
 
 
 
-    //% blockId=Tinybit_CarCtrl block="CarCtrl|%index"
+    //% blockId=Tinybit_CarCtrl block="Car Control|%index|for %time s"
     //% weight=5
     //% blockGap=10
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrl(index: CarState): void {
+    export function CarCtrl(index: CarState, time: number): void {
         switch (index) {
             case CarState.Car_Run: Car_run(255, 255); break;
             case CarState.Car_Back: Car_back(255, 255); break;
@@ -307,9 +307,11 @@ namespace Tinybit {
             case CarState.Car_SpinLeft: Car_spinleft(255, 255); break;
             case CarState.Car_SpinRight: Car_spinright(255, 255); break;
         }
+        control.waitMicros(time * 1000000); // Wait for the specified time
+        setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
+    //% blockId=Tinybit_CarCtrlSpeed block="Car Control|%index|speed %speed"
     //% weight=6
     //% blockGap=10
     //% speed.min=0 speed.max=255
@@ -327,7 +329,7 @@ namespace Tinybit {
         }
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed2 block="CarCtrlSpeed2|%index|speed1 %speed1|speed2 %speed2"
+    //% blockId=Tinybit_CarCtrlSpeed2 block="Car Control|%index|speed1 %speed1|speed2 %speed2"
     //% weight=7
     //% blockGap=10
     //% speed1.min=0 speed1.max=255 speed2.min=0 speed2.max=255
@@ -514,7 +516,7 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
         } else if (direction === Direction.Backward) {
             setPwmMotor(2, 100, 100); // Move backward
         }
-        basic.pause(200); // Pause for visibility of each step
+        basic.pause(500); // Pause for visibility of each step
         // Stop motors after each step
         setPwmMotor(0, 0, 0); // Stop all motors
         basic.pause(50); // Short pause before next step
