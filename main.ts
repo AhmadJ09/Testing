@@ -298,6 +298,7 @@ namespace TinybitACE {
     //% blockGap=10
     //% speed1.min=0 speed1.max=255 speed2.min=0 speed2.max=255
     //% color="#585CA9"
+    //% inlineInputMode=inline
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrlSpeed2(index: CarState, speed1: number, speed2: number, time: number): void {
         switch (index) {
