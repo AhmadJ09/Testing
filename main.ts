@@ -293,7 +293,7 @@ namespace TinybitACE {
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed2 block="Car Control|%index|speed1 %speed1|speed2 %speed2|for %time s"
+    //% blockId=Tinybit_CarCtrlSpeed2 block="Car Control|%index|speed1 %speed1|speed2 %speed2 for %time s"
     //% weight=7
     //% blockGap=10
     //% speed1.min=0 speed1.max=255 speed2.min=0 speed2.max=255
