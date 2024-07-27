@@ -5,7 +5,7 @@ load dependency
 "Tinybit-ACE": "file:../pxt-Tinybit"
 */
 //% color="#585CA9" weight=20 icon="\uf1b9"
-namespace Tinybit {
+namespace Tinybit-ACE {
     const PWM_ADD = 0x01
     const MOTOR = 0x02
     const RGB = 0x01
