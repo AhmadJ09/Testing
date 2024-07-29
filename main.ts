@@ -254,12 +254,15 @@ namespace TinybitACE {
 
 
 
-    //% blockId=Tinybit_CarCtrl block="Car Control|%index|for %time s"
+    //% blockId=Tinybit_CarCtrl block="Car Control|%index || for %time s"
     //% weight=5
     //% blockGap=10
     //% color="#585CA9"
+    //% expandableArgumentMode="toggle"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrl(index: CarState, time: number): void {
+    export function CarCtrl(index: CarState, time?: number): void {
+        if (time === undefined) {
+        time = -1;}
         switch (index) {
             case CarState.Car_Run: Car_run(255, 255); break;
             case CarState.Car_Back: Car_back(255, 255); break;
@@ -273,13 +276,16 @@ namespace TinybitACE {
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed block="Car Control|%index|speed %speed|for %time s"
+    //% blockId=Tinybit_CarCtrlSpeed block="Car Control|%index|speed %speed ||for %time s"
     //% weight=6
     //% blockGap=10
+    //% expandableArgumentMode="toggle"
     //% speed.min=0 speed.max=255
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrlSpeed(index: CarState, speed: number, time: number): void {
+    export function CarCtrlSpeed(index: CarState, speed: number, time?: number): void {
+        if (time === undefined) {
+        time = -1;}
         switch (index) {
             case CarState.Car_Run: Car_run(speed, speed); break;
             case CarState.Car_Back: Car_back(speed, speed); break;
