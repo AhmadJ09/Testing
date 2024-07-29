@@ -429,7 +429,7 @@ namespace TinybitACE {
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobot(direction: TurnDirection): void {
-        let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
+        let turnTime = 450; // Adjust this value based on your robot's turning speed and calibration
         if (direction === TurnDirection.Left) {
             setPwmMotor(3, 100, 100); // Turn left
         } else if (direction === TurnDirection.Right) {
