@@ -447,7 +447,7 @@ namespace Tinybit_ACE {
     //% blockId=stop_robot block="stop robot"
     //% weight=99
     //% blockGap=10
-    //% color="#bf6753"
+    //% color="#585CA9"
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
