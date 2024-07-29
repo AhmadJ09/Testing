@@ -17,7 +17,7 @@
         "_locales/fr/Tinybit-strings.json"
 
     ],
-    "icon": "https://github.com/AhmadJ09/Testing/blob/main/icon.png?raw=true",
+    "icon": "https://github.com/AhmadJ09/Testing/blob/main/icon.png",
     "testFiles": [
         "test.ts"
     ],
