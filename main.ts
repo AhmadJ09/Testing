@@ -303,7 +303,7 @@ namespace TinybitACE {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrlSpeed2(index: CarState, speed1: number, speed2: number, time?: number): void {
         if (time === undefined) {
-        time = -1;
+        time = -1;}
         switch (index) {
             case CarState.Car_Run: Car_run(speed1, speed2); break;
             case CarState.Car_Back: Car_back(speed1, speed2); break;
