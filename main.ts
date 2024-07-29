@@ -454,7 +454,7 @@ namespace TinybitACE {
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobotByAngle(direction: TurnDirection, angle: number): void {
-        let turnTimePer90Degrees = 500; // Time to turn 90 degrees
+        let turnTimePer90Degrees = 450; // Time to turn 90 degrees
         let turnTime = (angle / 90) * turnTimePer90Degrees; // Calculate time for the specified angle
 
         if (direction === TurnDirection.Left) {
