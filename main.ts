@@ -548,5 +548,11 @@ export function moveRobotForTimeAndSpeed(direction: Direction2, time: number, sp
     basic.pause(time * 1000); // Convert time from seconds to milliseconds
     setPwmMotor(0, 0, 0); // Stop all motors after the specified time
 }
+//% block="get last digit of $num"
+//% num.shadow="math_number"
+//% weight=104 color=#585CA9
+export function getLastDigit(num: number): number {
+    return num % 10;
+}
 
 }
