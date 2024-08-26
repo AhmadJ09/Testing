@@ -548,17 +548,27 @@ export function moveRobotForTimeAndSpeed(direction: Direction2, time: number, sp
     basic.pause(time * 1000); // Convert time from seconds to milliseconds
     setPwmMotor(0, 0, 0); // Stop all motors after the specified time
 }
-//% block="get last digit of $num"
+//% block="ones of $num"
 //% num.shadow="math_number"
 //% weight=104 color=#585CA9
 export function getLastDigit(num: number): number {
     return num % 10;
 }
 
-//% block="get tens digit of $num"
+//% block="tens of $num"
 //% num.shadow="math_number"
 export function getTensDigit(num: number): number {
     return Math.floor((num % 100) / 10);
+}
+//% block="hundreds of $num"
+//% num.shadow="math_number"
+export function getHundredsDigit(num: number): number {
+    return Math.floor((num % 1000) / 100);
+}
+//% block="last two digits of $num"
+//% num.shadow="math_number"
+export function getLastTwoDigits(num: number): number {
+    return num % 100;
 }
 
     
