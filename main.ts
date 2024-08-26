@@ -555,4 +555,11 @@ export function getLastDigit(num: number): number {
     return num % 10;
 }
 
+//% block="get tens digit of $num"
+//% num.shadow="math_number"
+export function getTensDigit(num: number): number {
+    return Math.floor((num % 100) / 10);
+}
+
+    
 }
