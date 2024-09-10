@@ -488,9 +488,9 @@ export enum Direction {
 export function moveRobotBySteps(direction: Direction, steps: number): void {
     for (let i = 0; i < steps; i++) {
         if (direction === Direction.Forward) {
-            setPwmMotor(1, 100, 100); // Move forward
+            setPwmMotor(1,70 ,70 ); // Move forward
         } else if (direction === Direction.Backward) {
-            setPwmMotor(2, 100, 100); // Move backward
+            setPwmMotor(2, 70,70 ); // Move backward
         }
         basic.pause(500); // Pause for visibility of each step
         // Stop motors after each step
